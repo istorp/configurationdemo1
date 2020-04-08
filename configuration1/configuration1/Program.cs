@@ -7,8 +7,10 @@ namespace configuration1
     {
         static void Main(string[] args)
         {
+            var enviromentName = Environment.GetEnvironmentVariable("ConfigEnv");
             var builder = new ConfigurationBuilder()
                 .AddJsonFile("appsettings.json")
+                .AddJsonFile($"appsettings.{enviromentName}.json",optional:true)
                 .Build();
 
             var defaultConnection = builder.GetConnectionString("DefaultConnection");
